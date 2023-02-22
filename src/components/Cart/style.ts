@@ -24,45 +24,82 @@ export const Content = styled(Dialog.Content, {
     fontSize: '$lg'
   },
 
-  'div:nth-child(1)': {
+  section: {
     display: 'flex',
-    gap: '1.25rem',
-    marginTop: '2rem',    
-
-    img: {
-      width: 100,
-      height: 93,
-      objectFit: 'cover',
-      background: 'linear-gradient(180deg, #1EA483 0%, #7465D4 100%)',
-      borderRadius: 8,      
-    },
-
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginTop: '2rem',  
+    
     div: {
       display: 'flex',
-      flexDirection: 'column',
-      lineHeight: 1.6,
-      
-      h3: {
-        fontSize: '$md',
-        fontWeight: 400,
-        color: '$gray300'
+      gap: '1.25rem',  
+      img: {
+        width: 100,
+        height: 93,
+        objectFit: 'cover',
+        background: 'linear-gradient(180deg, #1EA483 0%, #7465D4 100%)',
+        borderRadius: 8,      
       },
-      span: {
-        marginTop: '0.125rem',
-        fontWeight: 'bold',
-        fontSize: '$md',
+  
+      div: {
+        display: 'flex',
+        flexDirection: 'column',
+        lineHeight: 1.6,
+        
+        h3: {
+          fontSize: '$md',
+          fontWeight: 400,
+          color: '$gray300'
+        },
+        span: {
+          marginTop: '0.125rem',
+          fontWeight: 'bold',
+          fontSize: '$md',
+        },
+        
+        a: {
+          fontSize: 16,
+          color: '$green500',
+          fontWeight: 'bold',
+          marginTop: '0.5rem',
+        }
+      }
+    }, 
+    
+    footer: {
+      position: 'fixed',
+      bottom: 48,
+
+      div:{
+        display: 'flex',
+        justifyContent: 'space-between',
       },
-      
-      a: {
-        fontSize: 16,
-        color: '$green500',
+      'div:nth-child(1)':{
+        fontSize: 'md',
+        color: '$gray300',
+      },
+      'div:nth-child(2)':{
+        fontSize: '$lg',
         fontWeight: 'bold',
-        marginTop: '0.5rem',
+  
+        'span:nth-child(2)':{
+          fontSize: '$xl',
+        }
+      },
+      button: {
+        backgroundColor: '$green500',
+        color: '$white',
+        padding: '1rem 8rem',
+        borderRadius: 8,
+        border: 'none',
+        cursor: 'pointer',
+        
+        '&:hover':{
+          backgroundColor: '$green300',
+        }
       }
     }
-  },
-
-  
+  }
 })
 
 export const Close = styled(Dialog.Close, {
