@@ -1,6 +1,40 @@
 import { styled } from "@stitches/react";
 import * as Dialog from '@radix-ui/react-dialog';
 
+export const CardButton = styled('button', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: '$gray800',
+  height: '3rem',
+  width: '3rem',
+  border: 0,
+  borderRadius: '8px',
+  cursor: 'pointer',
+  
+  div: {
+    height: '1.5rem',
+    width: '1.5rem',
+
+    '&::after' : {
+      content: '1',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '20px',
+      height: '20px',
+      background: '$green500',
+      fontSize: '0.75rem',
+      color: 'white',
+      borderRadius: '10px',
+      position: 'relative',
+      fontWeight: 'bold',
+      top: '-50px',
+      left: '25px'
+    }  
+  }
+})
+
 export const Overlay = styled(Dialog.Overlay, {
   position: 'fixed',
   width: '100vw',
@@ -27,12 +61,14 @@ export const Content = styled(Dialog.Content, {
   section: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
     marginTop: '2rem',  
-    
+    gap: '1.25rem',
+    height: 'calc(100vh - 310px)',
+    overflow: 'auto',
+
     div: {
       display: 'flex',
-      gap: '1.25rem',  
+      gap: '1.25rem', 
       img: {
         width: 100,
         height: 93,
@@ -41,9 +77,10 @@ export const Content = styled(Dialog.Content, {
         borderRadius: 8,      
       },
   
-      div: {
+      ':nth-child(2)': {
         display: 'flex',
         flexDirection: 'column',
+        gap: 0,
         lineHeight: 1.6,
         
         h3: {
@@ -58,6 +95,7 @@ export const Content = styled(Dialog.Content, {
         },
         
         a: {
+          textDecoration: 'none',
           fontSize: 16,
           color: '$green500',
           fontWeight: 'bold',
@@ -93,7 +131,8 @@ export const Content = styled(Dialog.Content, {
         borderRadius: 8,
         border: 'none',
         cursor: 'pointer',
-        
+        fontSize: '$md',
+
         '&:hover':{
           backgroundColor: '$green300',
         }

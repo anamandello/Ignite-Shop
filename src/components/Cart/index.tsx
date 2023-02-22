@@ -1,14 +1,19 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { Close, Content, Overlay } from './style';
+import { CardButton, Close, Content, Overlay } from './style';
 import { X } from 'phosphor-react';
 import camiseta1 from '../../assets/Shirt/1.png';
 import Image from 'next/image'
+import cart from '../../assets/cart.svg'
 
 export const Cart = () => {
   return(
     <Dialog.Root>
-          <Dialog.Trigger>
-            Nova transação
+          <Dialog.Trigger asChild>
+            <CardButton>
+              <div>
+                <Image src={cart} alt='Button cart'/>
+              </div>
+            </CardButton>
           </Dialog.Trigger>
           <Dialog.Portal>
             <Overlay/>
@@ -26,6 +31,55 @@ export const Cart = () => {
                     <a>Remover</a>
                   </div>
                 </div>
+                <div>
+                  <Image src={camiseta1} alt=""/>
+                  <div>
+                    <h3>Camiseta X</h3>
+                    <span>R$ 59,90</span>
+                    <a>Remover</a>
+                  </div>
+                </div>
+                <div>
+                  <Image src={camiseta1} alt=""/>
+                  <div>
+                    <h3>Camiseta X</h3>
+                    <span>R$ 59,90</span>
+                    <a>Remover</a>
+                  </div>
+                </div>
+                <div>
+                  <Image src={camiseta1} alt=""/>
+                  <div>
+                    <h3>Camiseta X</h3>
+                    <span>R$ 59,90</span>
+                    <a>Remover</a>
+                  </div>
+                </div>
+                <div>
+                  <Image src={camiseta1} alt=""/>
+                  <div>
+                    <h3>Camiseta X</h3>
+                    <span>R$ 59,90</span>
+                    <a>Remover</a>
+                  </div>
+                </div>
+                <div>
+                  <Image src={camiseta1} alt=""/>
+                  <div>
+                    <h3>Camiseta X</h3>
+                    <span>R$ 59,90</span>
+                    <a>Remover</a>
+                  </div>
+                </div>
+                <div>
+                  <Image src={camiseta1} alt=""/>
+                  <div>
+                    <h3>Camiseta X</h3>
+                    <span>R$ 59,90</span>
+                    <a>Remover</a>
+                  </div>
+                </div>
+                
                 <div>
                   <Image src={camiseta1} alt=""/>
                   <div>
