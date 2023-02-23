@@ -16,7 +16,8 @@ interface HomeProps {
     id: string;
     name: string;
     imageUrl: string;
-    price: string;
+    priceFormatted: string;
+    price: number;
   }[]
 }
 
@@ -27,6 +28,7 @@ export default function Home({ products }: HomeProps) {
       spacing: 48
     }
   })
+
   return (
     <>
       <Head>
@@ -39,11 +41,11 @@ export default function Home({ products }: HomeProps) {
             return (
               <Link key={product.id} href={`/product/${product.id}`} prefetch={false}>
                 <Product className='keen-slider__slide'>
-                  <Image src={product.imageUrl} width={520} height={480} alt=""/>
+                  <Image src={product.imageUrl} width={520} height={480} alt="" priority/>
 
                   <footer>
                     <strong>{product.name}</strong>
-                    <span>{product.price}</span>
+                    <span>{product.priceFormatted}</span>
                   </footer>
                 </Product>
               </Link>
@@ -67,10 +69,11 @@ export const getStaticProps: GetStaticProps = async () => {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
-      price: new Intl.NumberFormat('pt-BR', {
+      priceFormatted: new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL'
-      }).format(price.unit_amount!/100)
+      }).format(price.unit_amount!/100),
+      price: price.unit_amount
     }
   })
 

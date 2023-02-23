@@ -5,24 +5,28 @@ import Image from 'next/image'
 import { Container, Header } from '../styles/pages/app'
 import { CartProvider } from 'use-shopping-cart'
 import { Cart } from '../components/Cart'
+import Link from 'next/link'
 
 globalStyles()
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Container>
-      <CartProvider
-        cartMode='checkout-session'
-        currency='BRL'
-        stripe={`${process.env.STRIPE_PUBLIC_KEY}`}
-        shouldPersist={false}
-      >
-        <Header>
-          <Image src={logoImg} alt="" />
-          <Cart/>
-        </Header>
-        <Component {...pageProps} />
-      </CartProvider>
-    </Container>
+    <CartProvider
+      cartMode="checkout-session"
+      currency="BRL"
+      stripe={`${process.env.STRIPE_PUBLIC_KEY}`}
+      shouldPersist
+    >
+      <Container>
+          <Header>
+            <Link href={'/'}>
+              <Image src={logoImg} alt="" />
+            </Link>
+            <Cart/>
+          </Header>
+          <Component {...pageProps} />
+      </Container>
+    </CartProvider>
+    
   )
 }

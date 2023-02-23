@@ -21,16 +21,17 @@ export const CardButton = styled('button', {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      width: '20px',
-      height: '20px',
+      width: '1.5rem',
+      height: '1.5rem',
       background: '$green500',
       fontSize: '0.75rem',
       color: 'white',
-      borderRadius: '10px',
+      borderRadius: '1rem',
+      border: '5px solid $gray900',
       position: 'relative',
       fontWeight: 'bold',
       top: '-50px',
-      left: '25px'
+      left: '20px'
     }  
   }
 })
@@ -68,10 +69,9 @@ export const Content = styled(Dialog.Content, {
 
     div: {
       display: 'flex',
-      gap: '1.25rem', 
+      gap: '1.25rem',
+
       img: {
-        width: 100,
-        height: 93,
         objectFit: 'cover',
         background: 'linear-gradient(180deg, #1EA483 0%, #7465D4 100%)',
         borderRadius: 8,      
@@ -88,6 +88,7 @@ export const Content = styled(Dialog.Content, {
           fontWeight: 400,
           color: '$gray300'
         },
+
         span: {
           marginTop: '0.125rem',
           fontWeight: 'bold',

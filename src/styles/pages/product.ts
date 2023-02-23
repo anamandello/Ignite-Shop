@@ -22,7 +22,9 @@ export const ImageContainer = styled('div', {
   justifyContent: 'center',
 
   img: {
-    objectFit: 'cover'
+    objectFit: 'cover',
+    height: 480,
+    width: 520
   }
 })
 

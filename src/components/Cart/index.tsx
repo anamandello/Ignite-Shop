@@ -1,11 +1,18 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { CardButton, Close, Content, Overlay } from './style';
 import { X } from 'phosphor-react';
-import camiseta1 from '../../assets/Shirt/1.png';
 import Image from 'next/image'
 import cart from '../../assets/cart.svg'
+import { useShoppingCart } from 'use-shopping-cart';
 
 export const Cart = () => {
+  const {
+    cartDetails,
+    removeItem,
+    cartCount,
+    formattedTotalPrice
+  } = useShoppingCart()
+
   return(
     <Dialog.Root>
           <Dialog.Trigger asChild>
@@ -23,74 +30,24 @@ export const Cart = () => {
                 <X size={24} />
               </Close>
               <section>
-                <div>
-                  <Image src={camiseta1} alt=""/>
-                  <div>
-                    <h3>Camiseta X</h3>
-                    <span>R$ 59,90</span>
-                    <a>Remover</a>
-                  </div>
-                </div>
-                <div>
-                  <Image src={camiseta1} alt=""/>
-                  <div>
-                    <h3>Camiseta X</h3>
-                    <span>R$ 59,90</span>
-                    <a>Remover</a>
-                  </div>
-                </div>
-                <div>
-                  <Image src={camiseta1} alt=""/>
-                  <div>
-                    <h3>Camiseta X</h3>
-                    <span>R$ 59,90</span>
-                    <a>Remover</a>
-                  </div>
-                </div>
-                <div>
-                  <Image src={camiseta1} alt=""/>
-                  <div>
-                    <h3>Camiseta X</h3>
-                    <span>R$ 59,90</span>
-                    <a>Remover</a>
-                  </div>
-                </div>
-                <div>
-                  <Image src={camiseta1} alt=""/>
-                  <div>
-                    <h3>Camiseta X</h3>
-                    <span>R$ 59,90</span>
-                    <a>Remover</a>
-                  </div>
-                </div>
-                <div>
-                  <Image src={camiseta1} alt=""/>
-                  <div>
-                    <h3>Camiseta X</h3>
-                    <span>R$ 59,90</span>
-                    <a>Remover</a>
-                  </div>
-                </div>
-                <div>
-                  <Image src={camiseta1} alt=""/>
-                  <div>
-                    <h3>Camiseta X</h3>
-                    <span>R$ 59,90</span>
-                    <a>Remover</a>
-                  </div>
-                </div>
+              {Object.keys(cartDetails).map(item => {
+                const { name, image, id, priceFormatted } = cartDetails[item]
                 
-                <div>
-                  <Image src={camiseta1} alt=""/>
-                  <div>
-                    <h3>Camiseta X</h3>
-                    <span>R$ 59,90</span>
-                    <a>Remover</a>
+                return(
+                  <div key={id}>
+                    <Image src={image} alt="" width={100} height={93}/>
+                    <div>
+                      <h3>{name}</h3>
+                      <span>{priceFormatted}</span>
+                      <a onClick={() => removeItem(id)}>Remover</a>
+                    </div>
                   </div>
-                </div>
+                )
+              })}
+                
                 <footer>
-                  <div><span>Quantidade</span><span>3 itens</span></div>
-                  <div><span>Valor total</span><span>R$ 79,90</span></div>
+                  <div><span>Quantidade</span><span>{cartCount} items</span></div>
+                  <div><span>Valor total</span><span>{formattedTotalPrice}</span></div>
                   <button>Finalizar Compra</button>
                 </footer>
 
