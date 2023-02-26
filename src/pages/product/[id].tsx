@@ -3,8 +3,6 @@ import { ImageContainer, ProductContainer, ProductDetails } from "@/src/styles/p
 import { GetStaticPaths, GetStaticProps } from "next"
 import Image from "next/image";
 import Stripe from "stripe"
-import axios from "axios";
-import { useState } from "react";
 import Head from "next/head";
 import { useShoppingCart } from 'use-shopping-cart'
 
@@ -51,7 +49,6 @@ export default function Product({ product }: ProductProps){
       price: product.price,
       price_id: product.priceId,
       image: product.imageUrl,
-      description: product.description,
       priceFormatted: product.priceFormatted
     })
     

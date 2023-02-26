@@ -4,14 +4,54 @@ import { X } from 'phosphor-react';
 import Image from 'next/image'
 import cart from '../../assets/cart.svg'
 import { useShoppingCart } from 'use-shopping-cart';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export const Cart = () => {
+  //const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
+  const [itemsCart, setItemsCart] = useState([])
+
   const {
     cartDetails,
     removeItem,
     cartCount,
     formattedTotalPrice
   } = useShoppingCart()
+
+  const attCart = () => {
+    setItemsCart([])
+    Object.keys(cartDetails).map(item => {
+      const { price_id } = cartDetails[item]
+      setItemsCart([...itemsCart, {price: price_id, quantity: 1}])
+    })
+  }
+
+  useEffect(() => {
+    
+    attCart()
+  }, [cartDetails])
+
+  const handleBuyItems = async () => {
+    try{
+      await attCart()
+
+      console.log(itemsCart)
+      //  const response = await axios.post('/api/checkout', {
+      //    listPrice: itemsCart,
+      //  })
+
+      //  const {checkoutUrl} = response.data
+
+       setItemsCart([])
+
+      //  window.location.href = checkoutUrl
+
+    }catch (err){
+      //Conectar com uma ferramenta de observabilidade (Datalog/ Sentry)
+      //setIsCreatingCheckoutSession(false)
+      alert('Falha ao redirecionar ao checkout')
+    }
+  }
 
   return(
     <Dialog.Root>
@@ -48,7 +88,7 @@ export const Cart = () => {
                 <footer>
                   <div><span>Quantidade</span><span>{cartCount} items</span></div>
                   <div><span>Valor total</span><span>{formattedTotalPrice}</span></div>
-                  <button>Finalizar Compra</button>
+                  <button onClick={handleBuyItems}>Finalizar Compra</button>
                 </footer>
 
               </section>

@@ -11,23 +11,50 @@ import 'keen-slider/keen-slider.min.css'
 import Stripe from "stripe";
 import Link from "next/link";
 
-interface HomeProps {
-  products: {
-    id: string;
-    name: string;
-    imageUrl: string;
-    priceFormatted: string;
-    price: number;
-  }[]
+import cart from '../assets/iconCart.svg'
+import { useShoppingCart } from "use-shopping-cart";
+
+interface ProductProps {
+  id: string;
+  name: string;
+  imageUrl: string;
+  priceFormatted: string;
+  price: number;
+  priceId: string;
+  currency: string;
 }
 
+interface HomeProps {
+  products: ProductProps[]
+}
+
+
+
 export default function Home({ products }: HomeProps) {
+  const { addItem, cartDetails } = useShoppingCart()
+
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
       spacing: 48
     }
   })
+
+  const handleAddProductCart = (product: ProductProps, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault()
+
+    if(cartDetails[product.id]) return
+    
+    addItem({
+      currency: 'BRL',
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      price_id: product.priceId,
+      image: product.imageUrl,
+      priceFormatted: product.priceFormatted
+    })
+  }
 
   return (
     <>
@@ -44,8 +71,13 @@ export default function Home({ products }: HomeProps) {
                   <Image src={product.imageUrl} width={520} height={480} alt="" priority/>
 
                   <footer>
-                    <strong>{product.name}</strong>
-                    <span>{product.priceFormatted}</span>
+                    <div>
+                      <strong>{product.name}</strong>
+                      <span>{product.priceFormatted}</span>
+                    </div>
+                    <button onClick={(e) => handleAddProductCart(product, e)}>
+                      <Image src={cart} alt="Add in cart" width={32} height={32}/>
+                    </button>
                   </footer>
                 </Product>
               </Link>
@@ -73,7 +105,9 @@ export const getStaticProps: GetStaticProps = async () => {
         style: 'currency',
         currency: 'BRL'
       }).format(price.unit_amount!/100),
-      price: price.unit_amount
+      price: price.unit_amount,
+      priceId: price.id,
+      currency: price.currency
     }
   })
 
