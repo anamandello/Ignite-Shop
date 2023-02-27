@@ -4,52 +4,43 @@ import { X } from 'phosphor-react';
 import Image from 'next/image'
 import cart from '../../assets/cart.svg'
 import { useShoppingCart } from 'use-shopping-cart';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 export const Cart = () => {
-  //const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
-  const [itemsCart, setItemsCart] = useState([])
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
 
   const {
     cartDetails,
     removeItem,
     cartCount,
-    formattedTotalPrice
+    formattedTotalPrice,
+    clearCart
   } = useShoppingCart()
 
-  const attCart = () => {
-    setItemsCart([])
+  const handleBuyItems = async () => {
+    setIsCreatingCheckoutSession(true)
+    const cartItems = []
     Object.keys(cartDetails).map(item => {
       const { price_id } = cartDetails[item]
-      setItemsCart([...itemsCart, {price: price_id, quantity: 1}])
+      cartItems.push({price: price_id, quantity: 1})
     })
-  }
 
-  useEffect(() => {
-    
-    attCart()
-  }, [cartDetails])
-
-  const handleBuyItems = async () => {
     try{
-      await attCart()
+      const response = await axios.post('/api/checkout', {
+        listPrice: cartItems
+      })
 
-      console.log(itemsCart)
-      //  const response = await axios.post('/api/checkout', {
-      //    listPrice: itemsCart,
-      //  })
+      const {checkoutUrl} = response.data
 
-      //  const {checkoutUrl} = response.data
-
-       setItemsCart([])
-
-      //  window.location.href = checkoutUrl
+      window.location.href = checkoutUrl
 
     }catch (err){
       //Conectar com uma ferramenta de observabilidade (Datalog/ Sentry)
-      //setIsCreatingCheckoutSession(false)
+      setIsCreatingCheckoutSession(false)
       alert('Falha ao redirecionar ao checkout')
+    }finally{
+      clearCart()
     }
   }
 
