@@ -1,7 +1,8 @@
 import { styled } from "@stitches/react";
 import * as Dialog from '@radix-ui/react-dialog';
+import { relative } from "path";
 
-export const CardButton = styled('button', {
+export const CartButton = styled('button', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -11,29 +12,29 @@ export const CardButton = styled('button', {
   border: 0,
   borderRadius: '8px',
   cursor: 'pointer',
-  
-  div: {
-    height: '1.5rem',
-    width: '1.5rem',
-
-    '&::after' : {
-      content: '1',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '1.5rem',
+      
+    div: {
       height: '1.5rem',
-      background: '$green500',
-      fontSize: '0.75rem',
-      color: 'white',
-      borderRadius: '1rem',
-      border: '5px solid $gray900',
-      position: 'relative',
-      fontWeight: 'bold',
-      top: '-50px',
-      left: '20px'
+      width: '1.5rem',
+
+      div: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        background: '$green500',
+        fontSize: '0.75rem',
+        width: '1.8rem',
+        height: '1.8rem',
+        borderRadius: '1rem',
+        border: '5px solid $gray900',
+        position: 'relative',
+        top: '-50px',
+        left: '20px',
+        color: '$white',
+        fontWeight: 'bold',
+
+      }
     }  
-  }
 })
 
 export const Overlay = styled(Dialog.Overlay, {

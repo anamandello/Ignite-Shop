@@ -1,4 +1,5 @@
 import { styled } from "@stitches/react";
+import { relative } from "path";
 
 export const SuccessContainer = styled('main', {
   display: 'flex',
@@ -40,14 +41,20 @@ export const ImageContainer = styled('div', {
   width: '100%',
   maxWidth: 130,
   height: 145,
-  background: 'linear-gradient(180deg, #1EA483 0%, #7465D4 100%)',
-  borderRadius: 8,
+  
   padding: '0.25rem',
   marginTop: '4rem',
 
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  marginRight: '-3rem',
+  
+  div: {
+    background: 'linear-gradient(180deg, #1EA483 0%, #7465D4 100%)',
+    borderRadius: 999,
+    marginLeft: '-3rem',
+    },
 
   img: {
     objectFit: 'cover'

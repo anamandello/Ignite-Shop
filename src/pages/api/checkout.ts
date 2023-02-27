@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
   const { listPrice } = req.body
-  console.log(listPrice)
 
   if(req.method !== 'POST'){
     return res.status(405).json({error: 'Method not alowed'})

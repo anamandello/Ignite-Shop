@@ -1,5 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { CardButton, Close, Content, Overlay } from './style';
+import { CartButton, Close, Content, Overlay } from './style';
 import { X } from 'phosphor-react';
 import Image from 'next/image'
 import cart from '../../assets/cart.svg'
@@ -47,11 +47,12 @@ export const Cart = () => {
   return(
     <Dialog.Root>
           <Dialog.Trigger asChild>
-            <CardButton>
+            <CartButton>
               <div>
                 <Image src={cart} alt='Button cart'/>
+                <div><span>{cartCount}</span></div>
               </div>
-            </CardButton>
+            </CartButton>
           </Dialog.Trigger>
           <Dialog.Portal>
             <Overlay/>

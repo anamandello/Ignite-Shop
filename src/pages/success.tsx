@@ -8,13 +8,10 @@ import { ImageContainer, SuccessContainer } from "../styles/pages/success";
 
 interface SuccessProps {
   customerName: string;
-  product: {
-    name: string;
-    imageUrl: string;
-  }
+  images: string[]
 }
 
-export default function Success({ customerName, product }: SuccessProps){
+export default function Success({ customerName, images }: SuccessProps){
   return(
     <>
       <Head>
@@ -25,11 +22,16 @@ export default function Success({ customerName, product }: SuccessProps){
       <SuccessContainer>
         <h1>Compra efetuada!</h1>
         <ImageContainer>
-          <Image src={product.imageUrl} width={120} height={110} alt=""/>
+          {images.map(item => (
+            <div key={item}>
+              <Image src={item} width={120} height={110} alt=""/>
+            </div>
+          ))
+          }
         </ImageContainer>
 
         <p>
-          Uhuul <strong>{customerName}</strong>, sua <strong>{product.name}</strong> já está a caminho da sua casa. 
+          Uhuul <strong>{customerName}</strong>, sua compra de {images.length} camisetas já está a caminho da sua casa. 
         </p>
 
         <Link href="/">
@@ -41,7 +43,7 @@ export default function Success({ customerName, product }: SuccessProps){
 }
 
 export const getServerSideProps: GetServerSideProps = async({ query }) => {
-  if(!query.sessionId){
+  if(!query.session_id){
     return {
       redirect:{
         destination: '/',
@@ -57,15 +59,14 @@ export const getServerSideProps: GetServerSideProps = async({ query }) => {
   })
 
   const customerName = session.customer_details.name
-  const product = session.line_items.data[0].price.product as Stripe.Product
+  //const product = session.line_items.data[0].price.product as Stripe.Product //Um item
+  const products = [...session.line_items.data].map(item => item.price.product) as Stripe.Product[] //Lista de itens
+  const images = products.map(item => item.images[0])
 
   return {
     props: {
       customerName,
-      product: {
-        name: product.name,
-        imageUrl: product.images[0]
-      }
+      images
     }
   }
 }
