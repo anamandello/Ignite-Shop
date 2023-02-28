@@ -28,8 +28,6 @@ interface HomeProps {
   products: ProductProps[]
 }
 
-
-
 export default function Home({ products }: HomeProps) {
   const { addItem, cartDetails } = useShoppingCart()
 

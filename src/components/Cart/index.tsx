@@ -36,7 +36,7 @@ export const Cart = () => {
       window.location.href = checkoutUrl
 
     }catch (err){
-      //Conectar com uma ferramenta de observabilidade (Datalog/ Sentry)
+      //Conectar com uma ferramenta de observabilidade (Datadog/ Sentry)
       setIsCreatingCheckoutSession(false)
       alert('Falha ao redirecionar ao checkout')
     }finally{
@@ -80,7 +80,7 @@ export const Cart = () => {
                 <footer>
                   <div><span>Quantidade</span><span>{cartCount} items</span></div>
                   <div><span>Valor total</span><span>{formattedTotalPrice}</span></div>
-                  <button onClick={handleBuyItems}>Finalizar Compra</button>
+                  <button onClick={handleBuyItems} disabled={isCreatingCheckoutSession}>Finalizar Compra</button>
                 </footer>
 
               </section>

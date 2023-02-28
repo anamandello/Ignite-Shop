@@ -1,6 +1,5 @@
 import { styled } from "@stitches/react";
 import * as Dialog from '@radix-ui/react-dialog';
-import { relative } from "path";
 
 export const CartButton = styled('button', {
   display: 'flex',
