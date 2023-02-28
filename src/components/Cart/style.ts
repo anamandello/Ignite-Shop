@@ -101,6 +101,11 @@ export const Content = styled(Dialog.Content, {
           color: '$green500',
           fontWeight: 'bold',
           marginTop: '0.5rem',
+          cursor: 'pointer',
+
+          '&:hover': {
+            color: '$green300',
+          }
         }
       }
     }, 
